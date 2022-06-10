@@ -8,13 +8,13 @@ class User(models.Model):
     fullname=models.CharField(max_length=20)
     join_date=models.DateTimeField(auto_now_add=True)
 
-class UserPofile(models.Model):  #User와 일대일관계/ Hobby와 다대다관계
+class UserProfile(models.Model):  #User와 일대일관계/ Hobby와 다대다관계
     user=models.OneToOneField(to=User, verbose_name="사용자", on_delete=models.CASCADE)
-    hobby=models.ManyToManyField(to="Hobby",verbose_name="취미")#Hobby클래스는 아래에 있으므로
+    hobby=models.ManyToManyField(to="Hobby",verbose_name="취미") #Hobby클래스는 아래에 있으므로
     introduction= models.TextField()
     birthday=models.DateField()
     age= models.IntegerField()
 
 class Hobby(models.Model):
-    name=models.CharField( max_length=50)
+    name=models.CharField(max_length=50)
 
