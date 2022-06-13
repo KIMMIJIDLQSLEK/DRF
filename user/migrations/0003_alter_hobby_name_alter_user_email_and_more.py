@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('quest', '0002_rename_userpofile_userprofile'),
+        ('user', '0002_rename_userpofile_userprofile'),
     ]
 
     operations = [

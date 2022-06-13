@@ -14,25 +14,25 @@ class MyGoodPermission(permissions.BasePermission):
     """
     def has_permission(self, request, view):
         user=request.user
-        result=bool(request.user and request.user.is_authenticated and user.permission_rank>10)
+        result=bool(request.user and request.user.is_authenticated and user.permission_rank>5)
         return
 
 
 #APIView를 사용하면 get, post, put, delete를 함수로 정의하여 사용할수있다.
 class UserApiView(APIView):
-    permission_classes=[MyGoodPermission]
-    # permission_classes = [permissions.AllowAny]
-    # permission_classes=[permissions.IsAdminUser]
-    # permission_classes=[permissions.IsAuthenticated]
+    # permission_classes=[MyGoodPermission]
+    permission_classes = [permissions.AllowAny] #누구나
+    # permission_classes=[permissions.IsAdminUser] #admin일경우
+    # permission_classes=[permissions.IsAuthenticated] #로그인한경우
 
     def get(self,request):
         return Response({'message':'get method!'})
 
-    def post(self,request):
-        return Response({'message':'post method!'})
-
-    def put(self,request):
-        return Response({'message':'put method!'})
-
-    def delete(self,request):
-        return Response({'message':'delete method!'})
+    # def post(self,request):
+    #     return Response({'message':'post method!'})
+    #
+    # def put(self,request):
+    #     return Response({'message':'put method!'})
+    #
+    # def delete(self,request):
+    #     return Response({'message':'delete method!'})

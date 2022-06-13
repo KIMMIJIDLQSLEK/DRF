@@ -37,8 +37,8 @@ class Migration(migrations.Migration):
                 ('introduction', models.TextField()),
                 ('birthday', models.DateField()),
                 ('age', models.IntegerField()),
-                ('hobby', models.ManyToManyField(to='quest.hobby', verbose_name='취미')),
-                ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='quest.user', verbose_name='사용자')),
+                ('hobby', models.ManyToManyField(to='user.hobby', verbose_name='취미')),
+                ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='user.user', verbose_name='사용자')),
             ],
         ),
     ]
