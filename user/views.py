@@ -3,6 +3,7 @@ from django.http import JsonResponse
 from rest_framework.views import APIView
 from rest_framework import permissions
 from rest_framework.response import Response
+from .models import Hobby
 
 #permission 커스텀
 class MyGoodPermission(permissions.BasePermission):
@@ -26,6 +27,13 @@ class UserApiView(APIView):
     # permission_classes=[permissions.IsAuthenticated] #로그인한경우
 
     def get(self,request):
+        hobby_list=Hobby.objects.all() #queryset
+        print(hobby_list)
+        one_hobby=Hobby.objects.get(id=1) #object: 매칭되는게 무조건 하나여야함!!!
+        print(one_hobby)
+        filter_hobby=Hobby.objects.filter(id__gt=3)  #queryset: object의 집합(리스트의 형태)-아무것도 없어도 queryset
+        print(filter_hobby)
+
         return Response({'message':'get method!'})
 
     # def post(self,request):
