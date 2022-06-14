@@ -31,8 +31,15 @@ class UserApiView(APIView):
 
     def get(self,request):
         try:
-            one_hobby=Hobby.objects.get(id=10) #object: 매칭되는게 무조건 하나여야함!!!
-            print(one_hobby)
+            one_hobby,created=Hobby.objects.get_or_create(id="406")
+
+            if created: #만들어야하면
+                one_hobby.name="달리기"
+                one_hobby.save()
+                print("생성완료")
+            else: #이미 존재하면
+                print(one_hobby)
+
         except Hobby.DoesNotExist:
             #object가 존재하지 않을때 이벤트
             return Response({'error': "존재하지 않는 hobby입니다."},status=status.HTTP_400_BAD_REQUEST)  #status클래스를 통해 가독성,생산성 좋아짐
