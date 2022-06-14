@@ -10,7 +10,7 @@ class UserManager(BaseUserManager):
         user = self.model(
             username=username,
         )
-        user.set_password(password)
+        user.set_password(password) #해쉬값으로 넣어줌
         user.save(using=self._db)
         return user
 
@@ -27,8 +27,8 @@ class UserManager(BaseUserManager):
 # Create your models here.
 class User(AbstractBaseUser):
     username=models.CharField("사용자계정",max_length=20,unique=True)
-    email=models.EmailField("이메일",max_length=20,unique=True)
-    password=models.CharField("비밀번호",max_length=60)
+    email=models.EmailField("이메일",max_length=20)
+    password=models.CharField("비밀번호",max_length=200)  #아직 해쉬값으로 들어가지 않음
     fullname=models.CharField("닉네임",max_length=20)
     join_date=models.DateTimeField("가입일자",auto_now_add=True)
     # permission_rank=models.IntegerField(default=0)
