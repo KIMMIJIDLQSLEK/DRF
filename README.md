@@ -2,10 +2,13 @@
 Django RestFramework 연습해보는 레포지토리입니다.
 
 ✅urls.py
+
 /admin
+
 /user
 
 ✅ models.py
+
 User 모델-커스텀 모델 생성
 username, email, password, fullname, join_date, is_activate, is_admin
 
