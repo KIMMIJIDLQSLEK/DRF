@@ -10,6 +10,7 @@ from .models import Hobby as HobbyModel
 from .models import User as UserModel
 from django.db.models import F
 
+from .serializers import UserSerializer
 from django.contrib.auth import login
 from django.conf import settings
 
@@ -46,34 +47,9 @@ class UserApiView(APIView):
         hobby_member=hobby.userprofile_set
         '''
 
-        user = UserModel.objects.get(id=1)  #현재 AnonymousUser
-        hobbys=HobbyModel.objects.all()
-        # hobbys= user.userprofile.hobby.all()
+        #모든 사용자에 대한 User와 UserProfile정보 가져오고
+        # 같은 취미를 가진 사람들 출력
+        print("get method")
+        user_serializer=UserSerializer(UserModel.objects.all(),many=True).data #쿼리셋일경우 many=True
+        return Response(user_serializer,status=status.HTTP_200_OK)
 
-
-        for hobby in hobbys:
-            hobby_members=hobby.userprofile_set.exclude(user=user).annotate(username=F('user__username')).values_list('username',flat=True)
-            hobby_members=list(hobby_members)
-            # print(dir(user))
-            print(f"hobby:{hobby.name}/hobby members:{hobby_members}")
-
-
-
-        try:
-            one_hobby,created=HobbyModel.objects.get_or_create(id="406")
-
-        except HobbyModel.DoesNotExist:
-            #object가 존재하지 않을때 이벤트
-            return Response({'error': "존재하지 않는 hobby입니다."},status=status.HTTP_400_BAD_REQUEST)  #status클래스를 통해 가독성,생산성 좋아짐
-            # return Response({'error': "존재하지 않는 hobby입니다."},status=400)
-
-        return Response({'message':'get method!'})
-
-    # def post(self,request):
-    #     return Response({'message':'post method!'})
-    #
-    # def put(self,request):
-    #     return Response({'message':'put method!'})
-    #
-    # def delete(self,request):
-    #     return Response({'message':'delete method!'})
