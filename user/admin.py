@@ -28,7 +28,6 @@ class HobbyAdmin(admin.ModelAdmin):
     # list_display=('id',)
 
 admin.site.register(User,UserAdmin)
-admin.site.register(UserProfile)
 admin.site.register(Hobby,HobbyAdmin) #Hobby라는 모델을 쓰고 HobbyAdmin 규칙 사용
 
 
