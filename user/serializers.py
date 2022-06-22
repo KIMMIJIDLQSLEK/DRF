@@ -24,11 +24,11 @@ class UserProfileSerializer(serializers.ModelSerializer):
         fields=["introduction","birthday","age","hobby"]
 
 class UserSerializer(serializers.ModelSerializer):
-    userprofile=UserProfileSerializer()
+    # userprofile=UserProfileSerializer()
     class Meta:
         #serializer에서 사용할 model, field지정
         model=User
-        fields=["id","username","email","password","fullname","userprofile"]
+        fields=["id","username","email","password","fullname"]
         #password는 쓰기 전용(읽을수없음)
         extra_kwargs={
             'password':
