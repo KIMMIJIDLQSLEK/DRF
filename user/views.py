@@ -48,7 +48,7 @@ class UserApiView(APIView):
         '''
 
         #모든 사용자에 대한 User와 UserProfile정보 가져오고
-        # 같은 취미를 가진 사람들 출력
+        # 같은 취미를 가진 사람들 출력-serializer에서 구한후 출력할것
         print("get method")
         user_serializer=UserSerializer(UserModel.objects.all(),many=True).data #쿼리셋일경우 many=True
         # hobby_serailizer=HobbySerializer(HobbyModel.objects.all(),many=True).data

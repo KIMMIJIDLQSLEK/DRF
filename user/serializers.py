@@ -3,16 +3,18 @@ from .models import User,UserProfile,Hobby
 
 class HobbySerializer(serializers.ModelSerializer):
     #내가 지정한 필드를 가져오고 싶다
-    my_custom_field=serializers.SerializerMethodField()
+    same_hobby_user=serializers.SerializerMethodField()
 
-    def get_my_custom_field(self,obj):
-        #각 유저의 유저프로필에 있는 취미 class 객체 출력
-        print(f"{obj}/{type(obj)}")
-        return "my_custom_field"
+    #같은 취미를 가진 유저들 출력할것
+    def get_same_hobby_user(self,obj): #obj: 각 유저의 취미객체
+        user_list=[]
+        for user_profile in obj.userprofile_set.all():
+            user_list.append(user_profile.user.fullname) #취미객체 역참조->userprofile_set/ userprofile의 정참조->user
+        return user_list
 
     class Meta:
         model=Hobby
-        fields=["name","my_custom_field"]
+        fields=["name","same_hobby_user"]
 
 class UserProfileSerializer(serializers.ModelSerializer):
     hobby=HobbySerializer(many=True)
