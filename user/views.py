@@ -55,7 +55,7 @@ class UserApiView(APIView):
         return Response(user_serializer,status=status.HTTP_200_OK)
 
     def post(self,request):
-        print(request.data) #request형태 확인
+        # print(request.data) #request형태 확인
         #validator
         '''
         사용자 정보를 입력받아 저장하는 함수
@@ -64,8 +64,8 @@ class UserApiView(APIView):
         #request.data 가져옴->serializer형태로 저장할것이기 떄문에 받을때도 serializer형태로 받아야됨
         #가져온 data가 정상인지 확인/ 비정상일 경우 error보냄
         user_serializer=UserSerializer(data=request.data)
-        if user_serializer.is_valid():
-            user_serializer.save()
-            return Response({'message':'정상'},status=status.HTTP_200_OK)
+        if user_serializer.is_valid():  #serializer의 field에 쓴 필드들을 검증하고 필요없는것은 삭제한다.
+            user_serializer.save()  #save할때 UserSerializer에서 create됨(지정한 필드 형식으로)->그러기 위해선 serializer에서 creator생성
+            return Response(user_serializer.data,status=status.HTTP_200_OK)
 
         return Response(user_serializer.errors,status=status.HTTP_400_BAD_REQUEST)
