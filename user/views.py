@@ -10,7 +10,7 @@ from .models import Hobby as HobbyModel
 from .models import User as UserModel
 from django.db.models import F
 
-from .serializers import UserSerializer
+from .serializers import UserSerializer,HobbySerializer
 from django.contrib.auth import login
 from django.conf import settings
 
@@ -51,5 +51,6 @@ class UserApiView(APIView):
         # 같은 취미를 가진 사람들 출력
         print("get method")
         user_serializer=UserSerializer(UserModel.objects.all(),many=True).data #쿼리셋일경우 many=True
+        # hobby_serailizer=HobbySerializer(HobbyModel.objects.all(),many=True).data
         return Response(user_serializer,status=status.HTTP_200_OK)
 
