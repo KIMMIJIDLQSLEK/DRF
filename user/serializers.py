@@ -51,6 +51,16 @@ class UserSerializer(serializers.ModelSerializer):
 
         return user
 
+    #custom validator
+    #Meta에서 검증하고 그다음 custom validator로 검증
+    def validate(self,data):
+        if data.get("userprofile",{}).get("age",'')<12:
+            raise serializers.ValidationError(  #12세 이하이면 error띄우기
+                detail={"error":"12세 이상만 가입할 수 있습니다."},
+            )
+        return data
+
+
 
     class Meta:
         #serializer에서 사용할 model, field지정
