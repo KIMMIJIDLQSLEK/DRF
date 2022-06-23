@@ -59,5 +59,12 @@ class UserSerializer(serializers.ModelSerializer):
         #password는 쓰기 전용(읽을수없음)
         extra_kwargs={
             'password':
-                {'write_only':True}
+                {'write_only':True},
+            'email':{
+                'error_messages':{
+                    'required':'이메일을 입력해주세요.',
+                    'invalid':'알맞은 형식의 이메일을 입력해주세요.',
+                },
+                'required':False #validator에서 검증여부 => False일경우 email error를 굳이 보여주지 않겠다.(default=True)
+            },
         }
